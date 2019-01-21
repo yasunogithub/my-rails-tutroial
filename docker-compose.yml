@@ -1,0 +1,15 @@
+version: '3'
+services:
+  db_tuto:
+    image: postgres
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data
+  web_tuto:
+    build: .
+    command: bundle exec rails s -p 3099 -b '0.0.0.0'
+    volumes:
+      - .:/myapp
+    ports:
+      - "3099:3099"
+    depends_on:
+      - db_tuto
